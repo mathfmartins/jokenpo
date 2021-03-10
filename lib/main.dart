@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'JokeeenPO!'),
+      home: MyHomePage(title: 'JokeeenPO'),
     );
   }
 }
@@ -29,19 +31,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  obtemJogadaDaMaquina() {
+    return Random().nextInt(2);
+  }
+  obtemImgDaMaquina(int codigo) {
+    if (codigo == 0) {
+      return 'assets/images/pedra.png';
+    }
+  }
   @override
   Widget build(BuildContext context) {
  
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Flexible(
-              flex: 1, // 2/3
+              flex: 0, // 2/3
               child: Image.asset('assets/images/home.jpeg'),
             ),
            SizedBox(
@@ -94,6 +105,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
             ),
+            SizedBox(height: 20),
+            Text(
+              'Máquinha'
+            ),
+            Flexible(
+               flex: 1, // 2/3
+               child: Center(
+               child: Image.asset('assets/images/pedra.png', width: 80),
+            ),
+          ),
+           SizedBox(height: 30),
+            Text(
+              'Você'
+            ),
+            Flexible(
+               flex: 1, // 2/3
+               child: Center(
+               child: Image.asset('assets/images/papel.png', width: 80),
+            ),
+          ),
           ],
           
       ),
