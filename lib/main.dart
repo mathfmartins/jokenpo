@@ -31,26 +31,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _imgMaquina = 'assets/images/papel.png';
-  var imgUsuario = 'assets/images/papel.png';
-
+  var _imgUsuario = 'assets/images/papel.png';
   obtemJogadaDaMaquina() {
     return Random().nextInt(2);
   }
 
-  obtemImgDaMaquina(int codigo) {
+  obtemJogada(String figura) {
     var jogMaquina = obtemJogadaDaMaquina();
     var imgMaquina;
+
     if (jogMaquina == 0) {
       imgMaquina = 'assets/images/pedra.png';
+      _imgUsuario = 'assets/images/' + figura + '.png';
     }
 
     if (jogMaquina == 1) {
       imgMaquina = 'assets/images/papel.png';
+      _imgUsuario = 'assets/images/' + figura + '.png';
     }
 
     if (jogMaquina == 2) {
       imgMaquina = 'assets/images/tesoura.png';
+      _imgUsuario = 'assets/images/' + figura + '.png';
     }
+    
     
     setState(() {
       this._imgMaquina = imgMaquina;
@@ -95,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           onPressed: () => {
-                            obtemImgDaMaquina(0),
+                            obtemJogada('pedra'),
                           }
                         ),
                         SizedBox(width: 60),
@@ -108,7 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 16,
                             ),
                           ),
-                          onPressed: () => {}
+                          onPressed: () => {
+                            obtemJogada('papel'),
+                          }
                         ),
                         SizedBox(width: 60),
                          RaisedButton(
@@ -120,7 +126,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 16,
                             ),
                           ),
-                          onPressed: () => {}
+                          onPressed: () => {
+                            obtemJogada('tesoura'),
+                          }
                         ),
                       ],
                     ),
@@ -143,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Flexible(
                flex: 1, // 2/3
                child: Center(
-               child: Image.asset('assets/images/papel.png', width: 80),
+               child: Image.asset(this._imgUsuario, width: 80),
             ),
           ),
           ],
