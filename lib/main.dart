@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'JokeeenPO'),
+      home: MyHomePage(title: 'Faça a sua escolha!'),
     );
   }
 }
@@ -30,15 +30,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var _imgMaquina = 'assets/images/papel.png';
+  var imgUsuario = 'assets/images/papel.png';
 
   obtemJogadaDaMaquina() {
     return Random().nextInt(2);
   }
+
   obtemImgDaMaquina(int codigo) {
-    if (codigo == 0) {
-      return 'assets/images/pedra.png';
+    var jogMaquina = obtemJogadaDaMaquina();
+    var imgMaquina;
+    if (jogMaquina == 0) {
+      imgMaquina = 'assets/images/pedra.png';
     }
+
+    if (jogMaquina == 1) {
+      imgMaquina = 'assets/images/papel.png';
+    }
+
+    if (jogMaquina == 2) {
+      imgMaquina = 'assets/images/tesoura.png';
+    }
+    
+    setState(() {
+      this._imgMaquina = imgMaquina;
+    });
   }
+
   @override
   Widget build(BuildContext context) {
  
@@ -46,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: true,
+        backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Column(
@@ -75,7 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 16,
                             ),
                           ),
-                          onPressed: () => {}
+                          onPressed: () => {
+                            obtemImgDaMaquina(0),
+                          }
                         ),
                         SizedBox(width: 60),
                          RaisedButton(
@@ -112,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Flexible(
                flex: 1, // 2/3
                child: Center(
-               child: Image.asset('assets/images/pedra.png', width: 80),
+               child: Image.asset(this._imgMaquina, width: 80),
             ),
           ),
            SizedBox(height: 30),
